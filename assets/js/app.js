@@ -52,9 +52,7 @@ window.addEventListener('load', () => {
 
         if (document.querySelector('.modal__active')) {
             body.style.overflow = 'hidden'
-        } else {
-            body.style.overflow = 'visible'
-        }
+        } 
     }
 
     const closeModals = (event) => {
@@ -64,6 +62,7 @@ window.addEventListener('load', () => {
         if (list.contains('modal') || list.contains('modal__close')) {
             activeModal.classList.remove('modal_active')
             body.style.overflow = 'visible'
+
         }
     }
 
