@@ -421,6 +421,7 @@ section {
     padding: 15px 25px;
     min-height: 202px;
     align-content: space-between;
+    flex: auto;
 }
 
 .service__title {
