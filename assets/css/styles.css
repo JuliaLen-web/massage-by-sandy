@@ -129,6 +129,10 @@ section {
     left: 0;
 }
 
+.header__basket {
+    cursor: pointer;
+}
+
 .burger {
     display: none;
 }
@@ -466,6 +470,58 @@ footer {
 
 .footer__contacts-item-title {
     font-weight: 700;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(78, 70, 52, 0.6);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.modal_active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal__body {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin: auto;
+    align-items: center;
+    position: relative;
+    max-width: 1000px;
+    min-height: 670px;
+    width: 100%;
+    border-radius: 27px;
+    background: #fff;
+}
+
+.modal__close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background: url(../images/modal-close.svg) center/cover no-repeat;
+    cursor: pointer;
+    z-index: 10;
 }
 
 
