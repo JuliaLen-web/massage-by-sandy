@@ -64,9 +64,10 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="header__basket" data-modal="modal-basket">
+                <button class="header__basket" data-modal="modal-basket" id="basket">
                     <img src="./assets/images/basket.svg">
-                </div>
+                    <div class="header__basket__num"  id="total-cart-summa">0</div>
+                </button>
                 <div class="burger">
                     <img src="./assets/images/burger.svg">
                 </div>
@@ -142,6 +143,7 @@
     <script type="module">
         import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 

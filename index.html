@@ -67,8 +67,8 @@
 
                 <button class="header__basket" data-modal="modal-basket" id="basket">
                     <img src="./assets/images/basket.svg">
-                    <div class="header__basket__num" id="basket_num">0</div>
-                  </button>
+                    <div class="header__basket__num"  id="total-cart-summa">0</div>
+                </button>
                 <div class="burger">
                     <img src="./assets/images/burger.svg">
                 </div>
@@ -136,7 +136,6 @@
                 <div class="title">Наши сотрудники</div>
 
                 <div class="staff swiper">
-
                     <div class="swiper-wrapper">
                         <div class="staff__item swiper-slide">
                             <div class="staff__item-img"><img src="./assets/images/staff/sandy.png"></div>
@@ -174,7 +173,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="swiper-pagination"></div>
                 </div>
             </section>
@@ -213,9 +211,32 @@
                 <div class="reviews swiper">
 
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">Slide 1</div>
-                        <div class="swiper-slide">Slide 2</div>
-                        <div class="swiper-slide">Slide 3</div>
+                        <div class="reviews__item swiper-slide">
+                            <div class="reviews__item-header">
+                                <div class="reviews__item-avatar">
+                                    <img src="./assets/images/reviews/avatar-1.jpg">
+                                </div>
+                                <div class="reviews__item-wrap">
+                                    <div class="reviews__item-name">
+                                        Виктория
+                                    </div>
+                                    <div class="reviews__item-rating">
+                                        <div class="reviews__item-rating-icon">
+                                            <img src="./assets/images/star.svg">
+                                        </div>
+                                        5
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviews__item-title">
+                                Мое впечатление от микрозайма
+                            </div>
+                            <div class="reviews__item-content">
+                                <p>Просто невероятные волшебные руки Александры ( Sandy), если приходишь со своей проблемой...</p>
+                                <button type="button" class="reviews__item-open">Читать</button>
+                                <button type="button" class="reviews__item-close"></button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="swiper-pagination"></div>
@@ -269,9 +290,7 @@
 
     <div class="modal modal-basket" id="modal-basket">
         <div class="modal__body">
-            <div class="modal__close">
-
-            </div>
+            <div class="modal__close"></div>
             <div class="modal__content">
                 <form action="" method="get">
                     <div class="modal-basket__order">
@@ -321,7 +340,7 @@
                             </div>
                         </div>
                         <div class="modal-basket__order-row">
-                            
+
                             <div class="modal-basket__order-price">
                                 Сумма: <b>3000</b> руб
                             </div>
@@ -360,6 +379,7 @@
     <script type="module">
         import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 
