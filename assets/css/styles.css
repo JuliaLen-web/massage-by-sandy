@@ -48,6 +48,7 @@ section {
     font-weight: 700;
     line-height: normal;
     text-align: center;
+    cursor: pointer;
 }
 
 .header {
@@ -595,7 +596,7 @@ footer {
     align-items: center;
     position: relative;
     max-width: 1000px;
-    min-height: 500px;
+    min-height: 300px;
     width: 100%;
     border-radius: 27px;
     background: #fff;
@@ -626,6 +627,10 @@ footer {
     margin-bottom: 24px;
 }
 
+.modal-basket__order {
+    display: none;
+}
+
 .modal-basket__order-row {
     display: flex;
     align-items: flex-start;
@@ -634,7 +639,7 @@ footer {
     padding: 18px 0
 }
 
-.modal-basket__order-row:not(:last-child)::after {
+.modal-basket__order-wrap .modal-basket__order-row::after {
     content: '';
     position: absolute;
     background: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));

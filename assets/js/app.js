@@ -241,39 +241,154 @@ window.addEventListener('load', () => {
         }
     `
 
-
-
     let data = JSON.parse(jsonData)
     let dataServices = data.services
 
-    dataServices.forEach(container => {
-        let category = Object.keys(container)
-        let serviceWrap = document.querySelector(`#${category} .service-wrapper`)
+    if (document.querySelector('.service-wrapper') && dataServices) {
+        dataServices.forEach(container => {
+            let category = Object.keys(container)
+            let serviceWrap = document.querySelector(`#${category} .service-wrapper`)
 
-        container[category].forEach(item => {
-            let elem = document.createElement("div");
-            elem.classList.add('service')
-            elem.id = item.id
-            elem.innerHTML = `
-                            <div class="service__title">
-                            ${item.name}
-                            </div>
-                            <div class="service__wrap">
-                                <div class="service__info">
-                                    <span>Стоимость</span>
-                                    <span>${item.price} ₽</span>
+            container[category].forEach(item => {
+                let elem = document.createElement("div");
+                elem.classList.add('service')
+                elem.id = item.id
+                elem.innerHTML = `
+                                <div class="service__title">
+                                ${item.name}
                                 </div>
-                                <button class="button"
-                                data-id="${item.id}"
-                                data-name="${item.name}"
-                                data-price="${item.price}"
-                                >В корзину</a>
-                            </div>
-                    `;
-            serviceWrap.appendChild(elem);
+                                <div class="service__wrap">
+                                    <div class="service__info">
+                                        <span>Стоимость</span>
+                                        <span>${item.price} ₽</span>
+                                    </div>
+                                    <button class="button"
+                                    data-id="${item.id}"
+                                    data-name="${item.name}"
+                                    data-price="${item.price}"
+                                    >В корзину</a>
+                                </div>
+                        `;
+                serviceWrap.appendChild(elem);
+            })
+        })
+    }
+
+    let dataReviews = data.reviews
+    // функция для рендеринга отзывов
+
+    let orderBtn = document.querySelectorAll('.service .button')
+    let basketNum = document.querySelector('#total-cart-summa')
+    let basket = document.querySelector('#basket')
+    let modalOrderBlock = document.querySelector('.modal-basket__order')
+
+
+    let savedOrders = JSON.parse(localStorage.getItem("orders"))
+
+    if (savedOrders === null) {
+        savedOrders = []
+    }
+
+    orderBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let orderItem = btn.getAttribute('data-id')
+
+            if (savedOrders === null) {
+                savedOrders.push(orderItem)
+            } else {
+                if (!savedOrders.includes(orderItem)) savedOrders.push(orderItem)
+            }
+
+            basketNum.innerHTML = savedOrders.length
+            localStorage.setItem("orders", JSON.stringify(savedOrders))
         })
     })
 
-    let dataReviews = data.reviews
+    if (savedOrders) basketNum.innerHTML = savedOrders.length
 
+    let modalOrdersContainer = document.querySelector('.modal-basket__order-wrap')
+    let sumBlock = document.querySelector('.modal-basket__order-summa')
+    let summa = +sumBlock.textContent
+
+    function createOrderRow(item) {
+        let order = document.createElement("div")
+        order.classList.add('modal-basket__order-row')
+        order.id = item.id
+        order.innerHTML = `
+            <div class="modal-basket__order-icon">
+                <img src="./assets/images/icon-basket.svg">
+            </div>
+            <div class="modal-basket__order-info">
+                <div class="modal-basket__order-name">${item.name}</div>
+                <div class="modal-basket__order-count">
+                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_lower">
+                        <img src="./assets/images/arrow-left.svg">
+                    </div>
+                    <div class="modal-basket__order-count-number">
+                        1
+                    </div>
+                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_upper">
+                        <img src="./assets/images/arrow-left.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-basket__order-price">
+                <b>${item.price}</b> руб
+            </div>`
+        
+
+        summa += item.price
+        modalOrdersContainer.appendChild(order)
+    }
+
+    function renderOrders() {        
+        let modalRenderedOrders = document.querySelectorAll('.modal-basket__order-wrap .modal-basket__order-row')
+
+        if (modalRenderedOrders.length === 0) {
+            dataServices.forEach(container => {
+                let category = Object.keys(container)
+
+                container[category].forEach(item => {
+                    if (savedOrders.includes(item.id)) {
+                        createOrderRow(item, summa)
+                    }
+                })
+            })
+        } else {
+            const modalRenderedOrdersId = []
+            modalRenderedOrders.forEach(el => modalRenderedOrdersId.push(el.getAttribute('id')))
+            console.log('нарисованные строки уже есть, нужно сравнение для отрисовки новой')
+
+            let notRendered = diff(savedOrders, modalRenderedOrdersId)
+            console.log(notRendered)
+            dataServices.forEach(container => {
+                let category = Object.keys(container)
+
+                container[category].forEach(item => {
+                    if(notRendered.includes(item.id)) {
+                        createOrderRow(item, summa)
+                    }
+                })
+            })
+        }
+
+        sumBlock.innerHTML = summa
+        console.log(summa)
+    }
+
+    function diff(arr1, arr2) {
+        const result = []
+        arr1.forEach(el => !arr2.includes(el) ? result.push(el) : result)
+        arr2.forEach(el => !arr1.includes(el) ? result.push(el) : result)
+        return result
+    }
+
+    basket.addEventListener('click', () => {
+        if (basketNum.textContent > 0) {
+            modalOrderBlock.style.display = 'block'
+        } else {
+            modalOrderBlock.style.display = 'none'
+        }
+        renderOrders()
+    })
 })

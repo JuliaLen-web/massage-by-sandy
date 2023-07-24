@@ -184,25 +184,25 @@
                         <div class="suggest__img"><img src="./assets/images/blocks/suggest-1.jpg"></div>
                         <div class="suggest__title">Акция</div>
                         <div class="suggest__text">Скидка 10% на первый сеанс</div>
-                        <a href="" class="button">Запись</a>
+                        <button type="button" class="button" data-modal="modal-callback">Запись</button>
                     </div>
                     <div class="suggest wrapper__item">
                         <div class="suggest__img"><img src="./assets/images/blocks/suggest-2.jpg"></div>
                         <div class="suggest__title">Акция</div>
                         <div class="suggest__text">Скидка 10% на первый сеанс</div>
-                        <a href="" class="button">Запись</a>
+                        <button type="button" class="button" data-modal="modal-callback">Запись</button>
                     </div>
                     <div class="suggest wrapper__item">
                         <div class="suggest__img"><img src="./assets/images/blocks/suggest-3.jpg"></div>
                         <div class="suggest__title">Акция</div>
                         <div class="suggest__text">Скидка 10% на первый сеанс</div>
-                        <a href="" class="button">Запись</a>
+                        <button type="button" class="button" data-modal="modal-callback">Запись</button>
                     </div>
                     <div class="suggest wrapper__item">
                         <div class="suggest__img"><img src="./assets/images/blocks/suggest-4.jpg"></div>
                         <div class="suggest__title">Акция</div>
                         <div class="suggest__text">Скидка 10% на первый сеанс</div>
-                        <a href="" class="button">Запись</a>
+                        <button type="button" class="button" data-modal="modal-callback">Запись</button>
                     </div>
             </section>
 
@@ -295,54 +295,10 @@
                 <form action="" method="get">
                     <div class="modal-basket__order">
                         <div class="modal-basket__title">Заказ</div>
+                        <div class="modal-basket__order-wrap"></div>
                         <div class="modal-basket__order-row">
-                            <div class="modal-basket__order-icon">
-                                <img src="./assets/images/icon-basket.svg">
-                            </div>
-                            <div class="modal-basket__order-info">
-                                <div class="modal-basket__order-name">Массаж шейно-воротниковой зоны 20 мин</div>
-                                <div class="modal-basket__order-count">
-                                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_lower">
-                                        <img src="./assets/images/arrow-left.svg">
-                                    </div>
-                                    <div class="modal-basket__order-count-number">
-                                        1
-                                    </div>
-                                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_upper">
-                                        <img src="./assets/images/arrow-left.svg">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="modal-basket__order-price">
-                                <b>1500</b> руб
-                            </div>
-                        </div>
-                        <div class="modal-basket__order-row">
-                            <div class="modal-basket__order-icon">
-                                <img src="./assets/images/icon-basket.svg">
-                            </div>
-                            <div class="modal-basket__order-info">
-                                <div class="modal-basket__order-name">Массаж шейно-воротниковой зоны 20 мин</div>
-                                <div class="modal-basket__order-count">
-                                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_lower">
-                                        <img src="./assets/images/arrow-left.svg">
-                                    </div>
-                                    <div class="modal-basket__order-count-number">
-                                        1
-                                    </div>
-                                    <div class="modal-basket__order-count-btn modal-basket__order-count-btn_upper">
-                                        <img src="./assets/images/arrow-left.svg">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-basket__order-price">
-                                <b>1500</b> руб
-                            </div>
-                        </div>
-                        <div class="modal-basket__order-row">
-
-                            <div class="modal-basket__order-price">
-                                Сумма: <b>3000</b> руб
+                                Сумма: <b class="modal-basket__order-summa"></b> руб
                             </div>
                         </div>
                     </div>
@@ -363,6 +319,33 @@
                         <div class="modal-basket__data-info"></div>
                         <div class="modal-basket__data-sum"></div>
                         <button type="submit" class="modal-basket__data-button button">Оформить заказ</button>
+                        <div class="modal-basket__data-regulations">Нажимая на кнопку, вы принимаете
+                            <a>Положение</a>
+                            и
+                            <a>Согласие</a>
+                            на обработку персональных данных.
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal-callback" id="modal-callback">
+        <div class="modal__body">
+            <div class="modal__close"></div>
+            <div class="modal__content">
+                <form action="" method="get">
+                    <div class="modal-basket__data">
+                        <div class="modal-basket__title">Оформить заказ</div>
+                        <label>
+                            <input type="text" id="name" name="name" placeholder="ФИО">
+                        </label>
+                        <label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="Телефон*" required>
+                        </label>
+                        <button type="submit" class="modal-basket__data-button button">Записаться</button>
                         <div class="modal-basket__data-regulations">Нажимая на кнопку, вы принимаете
                             <a>Положение</a>
                             и
