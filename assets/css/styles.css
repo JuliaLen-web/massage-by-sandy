@@ -361,19 +361,24 @@ section {
 }
 
 .suggest {
+    overflow-x: auto;
+}
+
+.suggest__item {
     border-radius: 25px;
     border: 3px solid #FFF;
     background: #FFF;
     text-align: center;
+    min-width: 250px;
 }
 
-.suggest__img {
+.suggest__item-img {
     border-radius: 25px 25px 0px 0px;
     overflow: hidden;
     margin-bottom: 12px;
 }
 
-.suggest__title {
+.suggest__item-title {
     color: #993939;
     font-size: 24px;
     font-weight: 500;
@@ -381,7 +386,7 @@ section {
     margin-bottom: 3px;
 }
 
-.suggest__text {
+.suggest__item-text {
     color: #CD8B8B;
     font-size: 14px;
     font-weight: 400;
@@ -389,7 +394,7 @@ section {
     margin-bottom: 20px;
 }
 
-.suggest .button {
+.suggest__item .button {
     max-width: 184px;
     width: 100%;
     margin: 0 auto 30px;
@@ -452,13 +457,14 @@ section {
 }
 
 .reviews {
-    width: calc(100% + 88px);
-    margin: 0 -44px;
+    width: calc(100% + 100px);
+    margin: 0 -50px;
+    box-sizing: border-box;
+    padding: 0 12px 40px;
 }
 
 .reviews__item {
-    max-width: calc(25% - 44px);
-    margin: 8px 22px;
+    margin: 8px 0;
     border-radius: 40px;
     background: #FFF;
     box-shadow: 0px 4px 10px rgba(162, 155, 155, 0.25);
@@ -748,6 +754,12 @@ footer {
     .staff__item {
         width: 265px;
     }
+
+    .reviews {
+        width: calc(100% + 10px);
+        margin: 0 -5px;
+        padding: 0 5px 40px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -834,8 +846,19 @@ footer {
         margin-right: -20px;
     }
 
-    .swiper-wrapper {
+    .staff .swiper-wrapper {
         width: calc(100% + 20px);
+    }
+
+    .suggest {
+        margin-right: -20px;
+        width: calc(100% + 20px);
+        box-sizing: border-box;
+        padding-right: 40px;
+    }
+
+    .reviews .swiper-wrapper {
+        align-items: center;
     }
 
     .footer__contacts {
@@ -940,6 +963,15 @@ footer {
 
     .service-wrapper .service {
         max-width: calc(100% - 20px);
+    }
+
+    .suggest {
+        flex-direction: row;
+    }
+
+    .suggest__item,
+    .suggest__item.wrapper__item:not(:last-child) {
+        margin-right: 20px;
     }
 
     footer {

@@ -28,10 +28,26 @@ window.addEventListener('load', () => {
             type: 'bullets',
             clickable: true
         },
+        autoHeight: true,
+        breakpoints: {
+            320: {
+                slidesPerView: 'auto',
+                spaceBetween: 15
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            },
+
+            1272: {
+                slidesPerView: 4,
+                spaceBetween: 20
+            },
+
+        }
     });
 
     //modals
-
     const modalBtn = document.querySelectorAll('[data-modal]')
     const modals = document.querySelectorAll('.modal')
     const body = document.querySelector('body')
@@ -74,6 +90,7 @@ window.addEventListener('load', () => {
         })
     })
 
+    //data
     let jsonData = `
         {
             "services": [
@@ -241,6 +258,7 @@ window.addEventListener('load', () => {
         }
     `
 
+    //render services
     let data = JSON.parse(jsonData)
     let dataServices = data.services
 
@@ -254,34 +272,70 @@ window.addEventListener('load', () => {
                 elem.classList.add('service')
                 elem.id = item.id
                 elem.innerHTML = `
-                                <div class="service__title">
-                                ${item.name}
-                                </div>
-                                <div class="service__wrap">
-                                    <div class="service__info">
-                                        <span>Стоимость</span>
-                                        <span>${item.price} ₽</span>
-                                    </div>
-                                    <button class="button"
-                                    data-id="${item.id}"
-                                    data-name="${item.name}"
-                                    data-price="${item.price}"
-                                    >В корзину</a>
-                                </div>
-                        `;
-                serviceWrap.appendChild(elem);
+                    <div class="service__title">
+                    ${item.name}
+                    </div>
+                    <div class="service__wrap">
+                        <div class="service__info">
+                            <span>Стоимость</span>
+                            <span>${item.price} ₽</span>
+                        </div>
+                        <button class="button"
+                        data-id="${item.id}"
+                        data-name="${item.name}"
+                        data-price="${item.price}"
+                        >В корзину</a>
+                    </div>
+                `
+                serviceWrap.appendChild(elem)
             })
         })
     }
 
+    //render reviews
     let dataReviews = data.reviews
-    // функция для рендеринга отзывов
+    let reviewsContainer = document.querySelector('.reviews .swiper-wrapper')
 
-    let orderBtn = document.querySelectorAll('.service .button')
+    if (reviewsContainer && dataReviews) {
+        dataReviews.forEach(item => {
+            let elem = document.createElement("div");
+            elem.classList.add('reviews__item', 'swiper-slide')
+            elem.id = item.id
+            elem.innerHTML = `
+                    <div class="reviews__item-header">
+                        <div class="reviews__item-avatar">
+                            <img src="./assets/images/reviews/avatar-1.jpg">
+                        </div>
+                        <div class="reviews__item-wrap">
+                            <div class="reviews__item-name">
+                            ${item.name}
+                            </div>
+                            <div class="reviews__item-rating">
+                                <div class="reviews__item-rating-icon">
+                                    <img src="./assets/images/star.svg">
+                                </div>
+                                ${item.rating}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviews__item-title">
+                        ${item.title}
+                    </div>
+                    <div class="reviews__item-content">
+                        <p>${item.content}</p>
+                        <button type="button" class="reviews__item-open">Читать</button>
+                        <button type="button" class="reviews__item-close"></button>
+                    </div>
+                `
+            reviewsContainer.appendChild(elem)
+        })
+    }
+
+    //render, create, add orders
+    let orderBtn = document.querySelectorAll('.service-wrapper .button')
     let basketNum = document.querySelector('#total-cart-summa')
     let basket = document.querySelector('#basket')
     let modalOrderBlock = document.querySelector('.modal-basket__order')
-
 
     let savedOrders = JSON.parse(localStorage.getItem("orders"))
 
@@ -320,6 +374,7 @@ window.addEventListener('load', () => {
             </div>
             <div class="modal-basket__order-info">
                 <div class="modal-basket__order-name">${item.name}</div>
+                <input type="hidden" name="service-item-${item.id}" value="${item.name} ${item.price}">
                 <div class="modal-basket__order-count">
                     <div class="modal-basket__order-count-btn modal-basket__order-count-btn_lower">
                         <img src="./assets/images/arrow-left.svg">
@@ -335,13 +390,12 @@ window.addEventListener('load', () => {
             <div class="modal-basket__order-price">
                 <b>${item.price}</b> руб
             </div>`
-        
 
         summa += item.price
         modalOrdersContainer.appendChild(order)
     }
 
-    function renderOrders() {        
+    function renderOrders() {
         let modalRenderedOrders = document.querySelectorAll('.modal-basket__order-wrap .modal-basket__order-row')
 
         if (modalRenderedOrders.length === 0) {
@@ -365,7 +419,7 @@ window.addEventListener('load', () => {
                 let category = Object.keys(container)
 
                 container[category].forEach(item => {
-                    if(notRendered.includes(item.id)) {
+                    if (notRendered.includes(item.id)) {
                         createOrderRow(item, summa)
                     }
                 })
