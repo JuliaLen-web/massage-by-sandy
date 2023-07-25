@@ -460,16 +460,17 @@ section {
     width: calc(100% + 100px);
     margin: 0 -50px;
     box-sizing: border-box;
-    padding: 0 12px 40px;
+    padding: 0 12px 50px;
 }
 
 .reviews__item {
+    position: relative;
     margin: 8px 0;
     border-radius: 40px;
     background: #FFF;
     box-shadow: 0px 4px 10px rgba(162, 155, 155, 0.25);
     box-sizing: border-box;
-    padding: 20px 25px;
+    padding: 20px;
 }
 
 .reviews__item-header {
@@ -525,6 +526,30 @@ section {
     font-weight: 600;
     cursor: pointer;
     border: none;
+    background: none;
+}
+
+.reviews__item-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #D3D3D3;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.14);
+}
+
+.reviews__item-close.visible {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+    cursor: pointer;
 }
 
 footer {
@@ -746,6 +771,11 @@ footer {
     font-weight: 600;
 }
 
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 0;
+    top: auto;
+}
+
 @media (max-width: 1272px) {
     .container {
         padding: 0 20px;
@@ -758,7 +788,7 @@ footer {
     .reviews {
         width: calc(100% + 10px);
         margin: 0 -5px;
-        padding: 0 5px 40px;
+        padding: 0 5px 50px;
     }
 }
 

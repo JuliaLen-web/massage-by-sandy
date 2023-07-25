@@ -304,7 +304,7 @@ window.addEventListener('load', () => {
             elem.innerHTML = `
                     <div class="reviews__item-header">
                         <div class="reviews__item-avatar">
-                            <img src="./assets/images/reviews/avatar-1.jpg">
+                            <img src="./assets/images/reviews/avatar-${item.id}.png">
                         </div>
                         <div class="reviews__item-wrap">
                             <div class="reviews__item-name">
@@ -322,14 +322,44 @@ window.addEventListener('load', () => {
                         ${item.title}
                     </div>
                     <div class="reviews__item-content">
-                        <p>${item.content}</p>
-                        <button type="button" class="reviews__item-open">Читать</button>
-                        <button type="button" class="reviews__item-close"></button>
+                        <p><span>${item.content.substring(0, 85) + '...'}</span><button type="button" data-id="${item.id}" class="reviews__item-open">Читать</button></p>
+                        <button type="button"  data-id="${item.id}" class="reviews__item-close"></button>
                     </div>
                 `
             reviewsContainer.appendChild(elem)
         })
     }
+
+    let reviewsOpen = document.querySelectorAll('.reviews__item-open')
+
+    reviewsOpen.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let reviewsId = btn.getAttribute('data-id')
+            let reviewFocus = btn.previousElementSibling
+            let content = dataReviews.filter(el => el.id == reviewsId)[0].content
+
+            console.log(reviewFocus)
+            reviewFocus.innerText = content
+            btn.style.display = 'none'
+            reviewFocus.parentElement.nextElementSibling.classList.add('visible')
+            reviewsSwiper.update()
+        })
+    })
+
+    let reviewsClose = document.querySelectorAll('.reviews__item-close')
+
+    reviewsClose.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let reviewsId = btn.getAttribute('data-id')
+            let reviewFocus = btn.previousElementSibling.childNodes[0]
+            let content = dataReviews.filter(el => el.id == reviewsId)[0].content
+
+            reviewFocus.innerHTML = `${content.substring(0, 85) + '...'}`
+            reviewFocus.nextElementSibling.style.display = 'inline'
+            btn.classList.remove('visible')
+            reviewsSwiper.update()
+        })
+    })
 
     //render, create, add orders
     let orderBtn = document.querySelectorAll('.service-wrapper .button')
